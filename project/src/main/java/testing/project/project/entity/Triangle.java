@@ -15,6 +15,12 @@ public class Triangle {
     private int side3;
     private String TriangleType;
 
+    public void setSide(int s1, int s2, int s3) {
+        this.side1 = s1;
+        this.side2 = s2;
+        this.side3 = s3;
+    }
+
     public int getSide1() {
         return side1;
     }
