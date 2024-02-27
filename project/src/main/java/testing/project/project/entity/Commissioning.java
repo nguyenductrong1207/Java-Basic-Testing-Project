@@ -1,10 +1,10 @@
 package testing.project.project.entity;
 
-public class CommissioningProblem {
+public class Commissioning {
 	private int totalLocks, totalStocks, totalBarrales;
 	private double lockPrice, stockPrice, barralesPrice, lockSales, stockSales, barraelSale, Sales, Commission;
 
-	public CommissioningProblem() {
+	public Commissioning() {
 		lockPrice = 45.0;
 		stockPrice = 30.0;
 		barralesPrice = 25.0;
