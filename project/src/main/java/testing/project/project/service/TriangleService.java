@@ -1,14 +1,22 @@
 package testing.project.project.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import testing.project.project.repository.TriangleRepository;
+import testing.project.project.entity.Triangle;
 
 @Service
 public class TriangleService {
 
-    @Autowired
-    private TriangleRepository triangleRepository;
+    List<Triangle> listTriangle = new ArrayList<>();
+
+    public List<Triangle> generatedTestcases() {
+
+        
+
+        return listTriangle;
+    }
 
 }
