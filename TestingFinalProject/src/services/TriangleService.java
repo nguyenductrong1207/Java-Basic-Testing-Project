@@ -32,28 +32,13 @@ public class TriangleService extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void bvaGeneratingTestcases() {
-        bvaGeneratingSide();
-
-        DefaultTableModel tableInformation = (DefaultTableModel) tblInformation.getModel();
-        tableInformation.setRowCount(0);
-
-        int i = 1;
-        for (Triangle triangle : triangles) {
-            Vector table = new Vector();
-
-            table.add(i);
-            table.add(triangle.getSide1());
-            table.add(triangle.getSide2());
-            table.add(triangle.getSide3());
-            table.add(triangle.classify());
-            tableInformation.addRow(table);
-            i++;
-        }
-        JOptionPane.showMessageDialog(this, "Total Elements: 15 and Total Unique Elements: 13");
+    public void bvaShowingTestcases() {
+        bvaGeneratingTestcases();
+        getTestcases();
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 5  |  Total Elements: 15  |  Total Unique Elements: 13");
     }
 
-    public void bvaGeneratingSide() {
+    public void bvaGeneratingTestcases() {
         Triangle triangle = new Triangle();
         triangle.setSide(nom, nom, nom);
         triangles.add(triangle);
@@ -79,28 +64,13 @@ public class TriangleService extends javax.swing.JFrame {
         }
     }
 
-    public void rBVAGeneratingTestcases() {
-        rBVAGeneratingSide();
-
-        DefaultTableModel tableInformation = (DefaultTableModel) tblInformation.getModel();
-        tableInformation.setRowCount(0);
-
-        int i = 1;
-        for (Triangle triangle : triangles) {
-            Vector table = new Vector();
-
-            table.add(i);
-            table.add(triangle.getSide1());
-            table.add(triangle.getSide2());
-            table.add(triangle.getSide3());
-            table.add(triangle.classify());
-            tableInformation.addRow(table);
-            i++;
-        }
-        JOptionPane.showMessageDialog(this, "Total Elements: 21 and Total Unique Elements: 19");
+    public void rBVAShowingTestcases() {
+        rBVAGeneratingTestcases();
+        getTestcases();
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 7  |  Total Elements: 21  |  Total Unique Elements: 19");
     }
 
-    public void rBVAGeneratingSide() {
+    public void rBVAGeneratingTestcases() {
         Triangle triangle = new Triangle();
         triangle.setSide(nom, nom, nom);
         triangles.add(triangle);
@@ -126,6 +96,24 @@ public class TriangleService extends javax.swing.JFrame {
         }
     }
 
+    public void getTestcases() {
+        DefaultTableModel tableInformation = (DefaultTableModel) tblInformation.getModel();
+        tableInformation.setRowCount(0);
+
+        int i = 1;
+        for (Triangle triangle : triangles) {
+            Vector table = new Vector();
+
+            table.add(i);
+            table.add(triangle.getSide1());
+            table.add(triangle.getSide2());
+            table.add(triangle.getSide3());
+            table.add(triangle.classify());
+            tableInformation.addRow(table);
+            i++;
+        }
+    }
+
     public void getInformation() {
         triangles = new ArrayList<>();
         min = Integer.parseInt(txtMin.getText());
@@ -135,6 +123,16 @@ public class TriangleService extends javax.swing.JFrame {
         minusMin = min - 1;
         minusMax = max - 1;
         maxPlus = max + 1;
+    }
+
+    public boolean checkValidate() {
+        String min = txtMin.getText();
+        String max = txtMax.getText();
+
+        if (min.isEmpty() || max.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -426,28 +424,24 @@ public class TriangleService extends javax.swing.JFrame {
 
     private void btnBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBVAActionPerformed
 
-        if (txtMin.getText().isEmpty() || txtMax.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Min or Max Range Can Not Be Empty!");
-        } else {
+        if (checkValidate()) {
             getInformation();
-            bvaGeneratingTestcases();
+            bvaShowingTestcases();
+        } else {
+            JOptionPane.showMessageDialog(this, "Input Range Can Not Be Empty!");
         }
 
     }//GEN-LAST:event_btnBVAActionPerformed
 
     private void btnRBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBVAActionPerformed
 
-        if (txtMin.getText().isEmpty() || txtMax.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Min or Max Range Can Not Be Empty!");
-        } else {
+        if (checkValidate()) {
             getInformation();
-            rBVAGeneratingTestcases();
+            rBVAShowingTestcases();
+        } else {
+            JOptionPane.showMessageDialog(this, "Input Range Can Not Be Empty!");
         }
     }//GEN-LAST:event_btnRBVAActionPerformed
-
-    public static void main(String args[]) {
-
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBVA;
