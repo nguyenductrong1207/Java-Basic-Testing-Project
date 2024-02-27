@@ -126,6 +126,17 @@ public class TriangleService extends javax.swing.JFrame {
         }
     }
 
+    public void getInformation() {
+        triangles = new ArrayList<>();
+        min = Integer.parseInt(txtMin.getText());
+        max = Integer.parseInt(txtMax.getText());
+        nom = (max + min) / 2;
+        minPlus = min + 1;
+        minusMin = min - 1;
+        minusMax = max - 1;
+        maxPlus = max + 1;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -418,13 +429,7 @@ public class TriangleService extends javax.swing.JFrame {
         if (txtMin.getText().isEmpty() || txtMax.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Min or Max Range Can Not Be Empty!");
         } else {
-            triangles = new ArrayList<>();
-            min = Integer.parseInt(txtMin.getText());
-            max = Integer.parseInt(txtMax.getText());
-            nom = (max + min) / 2;
-            minPlus = min + 1;
-            minusMax = max - 1;
-
+            getInformation();
             bvaGeneratingTestcases();
         }
 
@@ -435,15 +440,7 @@ public class TriangleService extends javax.swing.JFrame {
         if (txtMin.getText().isEmpty() || txtMax.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Min or Max Range Can Not Be Empty!");
         } else {
-            triangles = new ArrayList<>();
-            min = Integer.parseInt(txtMin.getText());
-            max = Integer.parseInt(txtMax.getText());
-            nom = (max + min) / 2;
-            minPlus = min + 1;
-            minusMin = min - 1;
-            minusMax = max - 1;
-            maxPlus = max + 1;
-
+            getInformation();
             rBVAGeneratingTestcases();
         }
     }//GEN-LAST:event_btnRBVAActionPerformed
