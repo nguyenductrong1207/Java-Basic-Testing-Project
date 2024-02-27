@@ -44,8 +44,8 @@ public class Commission {
         boolean c1, c2, c3;
 
         c1 = (1 <= totalLocks) && (totalLocks <= 60);
-        c2 = (1 <= totalStocks) && (totalStocks < 70);
-        c3 = (1 <= totalBarrales) && (totalBarrales >= 80);
+        c2 = (1 <= totalStocks) && (totalStocks <= 70);
+        c3 = (1 <= totalBarrales) && (totalBarrales <= 80);
 
         if (!c1 || !c2 || !c3) {
             commission = 0;

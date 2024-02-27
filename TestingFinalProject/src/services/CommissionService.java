@@ -19,9 +19,9 @@ import javax.swing.table.TableRowSorter;
 
 public class CommissionService extends javax.swing.JFrame {
 
-    private int lock;
-    private int stock;
-    private int barrel;
+    private int lockNom, lockBetween, lockBetweenMinus, lockBetweenPlus, lockTo, lockToMinus, lockToPlus;
+    private int stockNom, stockBetween, stockBetweenMinus, stockBetweenPlus, stockTo, stockToMinus, stockToPlus;
+    private int barrelNom, barrelBetween, barrelBetweenMinus, barrelBetweenPlus, barrelTo, barrelToMinus, barrelToPlus;
     private List<Commission> commissions;
 
     public CommissionService() {
@@ -51,28 +51,32 @@ public class CommissionService extends javax.swing.JFrame {
 
     public void bvaGeneratingSide() {
         Commission commission = new Commission();
-        commission.setInput(lock, stock, barrel);
+        commission.setInput(lockNom, stockNom, barrelNom);
         commissions.add(commission);
 
-//        int[] arr = {lock, minPlus, minusMax, stock};
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle1 = new Triangle();
-//            triangle1.setSide(arr[i], barrel, barrel);
-//            commissions.add(triangle1);
-//        }
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle2 = new Triangle();
-//            triangle2.setSide(barrel, arr[i], barrel);
-//            commissions.add(triangle2);
-//        }
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle3 = new Triangle();
-//            triangle3.setSide(barrel, barrel, arr[i]);
-//            commissions.add(triangle3);
-//        }
+        int[] lockArr = {lockBetween, lockBetweenPlus, lockToMinus, lockTo};
+
+        for (int i = 0; i < lockArr.length; i++) {
+            Commission commission1 = new Commission();
+            commission1.setInput(lockArr[i], stockNom, barrelNom);
+            commissions.add(commission1);
+        }
+
+        int[] stockArr = {stockBetween, stockBetweenPlus, stockToMinus, stockTo};
+
+        for (int i = 0; i < stockArr.length; i++) {
+            Commission commission2 = new Commission();
+            commission2.setInput(lockNom, stockArr[i], barrelNom);
+            commissions.add(commission2);
+        }
+
+        int[] barrelArr = {barrelBetween, barrelBetweenPlus, barrelToMinus, barrelTo};
+
+        for (int i = 0; i < barrelArr.length; i++) {
+            Commission commission3 = new Commission();
+            commission3.setInput(lockNom, stockNom, barrelArr[i]);
+            commissions.add(commission3);
+        }
     }
 
     public void rBVAGeneratingTestcases() {
@@ -98,28 +102,61 @@ public class CommissionService extends javax.swing.JFrame {
 
     public void rBVAGeneratingSide() {
         Commission commission = new Commission();
-        commission.setInput(lock, stock, barrel);
+        commission.setInput(lockNom, stockNom, barrelNom);
         commissions.add(commission);
 
-//        int[] arr = {minusMin, lock, minPlus, minusMax, stock, maxPlus};
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle1 = new Triangle();
-//            triangle1.setSide(arr[i], barrel, barrel);
-//            commissions.add(triangle1);
-//        }
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle2 = new Triangle();
-//            triangle2.setSide(barrel, arr[i], barrel);
-//            commissions.add(triangle2);
-//        }
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            Triangle triangle3 = new Triangle();
-//            triangle3.setSide(barrel, barrel, arr[i]);
-//            commissions.add(triangle3);
-//        }
+        int[] lockArr = {lockBetweenMinus, lockBetween, lockBetweenPlus, lockToMinus, lockTo, lockToPlus};
+
+        for (int i = 0; i < lockArr.length; i++) {
+            Commission commission1 = new Commission();
+            commission1.setInput(lockArr[i], stockNom, barrelNom);
+            commissions.add(commission1);
+        }
+
+        int[] stockArr = {stockBetweenMinus, stockBetween, stockBetweenPlus, stockToMinus, stockTo, stockToPlus};
+
+        for (int i = 0; i < stockArr.length; i++) {
+            Commission commission2 = new Commission();
+            commission2.setInput(lockNom, stockArr[i], barrelNom);
+            commissions.add(commission2);
+        }
+
+        int[] barrelArr = {barrelBetweenMinus, barrelBetween, barrelBetweenPlus, barrelToMinus, barrelTo, barrelToPlus};
+
+        for (int i = 0; i < barrelArr.length; i++) {
+            Commission commission3 = new Commission();
+            commission3.setInput(lockNom, stockNom, barrelArr[i]);
+            commissions.add(commission3);
+        }
+
+    }
+
+    public void getInformation() {
+        commissions = new ArrayList<>();
+        lockNom = (int) (Integer.parseInt(txtLockBetween.getText()) + Integer.parseInt(txtLockTo.getText())) / 2;
+        stockNom = (int) (Integer.parseInt(txtStockBetween.getText()) + Integer.parseInt(txtStockTo.getText())) / 2;
+        barrelNom = (int) (Integer.parseInt(txtBarrelBetween.getText()) + Integer.parseInt(txtBarrelTo.getText())) / 2;
+
+        lockBetween = Integer.parseInt(txtLockBetween.getText());
+        lockBetweenMinus = lockBetween - 1;
+        lockBetweenPlus = lockBetween + 1;
+        lockTo = Integer.parseInt(txtLockTo.getText());
+        lockToMinus = lockTo - 1;
+        lockToPlus = lockTo + 1;
+
+        stockBetween = Integer.parseInt(txtStockBetween.getText());
+        stockBetweenMinus = stockBetween - 1;
+        stockBetweenPlus = stockBetween + 1;
+        stockTo = Integer.parseInt(txtStockTo.getText());
+        stockToMinus = stockTo - 1;
+        stockToPlus = stockTo + 1;
+
+        barrelBetween = Integer.parseInt(txtBarrelBetween.getText());
+        barrelBetweenMinus = barrelBetween - 1;
+        barrelBetweenPlus = barrelBetween + 1;
+        barrelTo = Integer.parseInt(txtBarrelTo.getText());
+        barrelToMinus = barrelTo - 1;
+        barrelToPlus = barrelTo + 1;
     }
 
     @SuppressWarnings("unchecked")
@@ -143,12 +180,21 @@ public class CommissionService extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtLock = new java.awt.TextField();
+        txtLockBetween = new java.awt.TextField();
         jLabel7 = new javax.swing.JLabel();
-        txtStock = new java.awt.TextField();
+        txtStockBetween = new java.awt.TextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtBarrel = new java.awt.TextField();
+        txtBarrelBetween = new java.awt.TextField();
+        txtLockTo = new java.awt.TextField();
+        txtStockTo = new java.awt.TextField();
+        txtBarrelTo = new java.awt.TextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -323,26 +369,56 @@ public class CommissionService extends javax.swing.JFrame {
         jLabel3.setText("Commission Automated Test Case Generating Tool");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Lock:");
 
-        txtLock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtLockBetween.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Stock:");
 
-        txtStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtStockBetween.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Input Range for the input below");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Barrel:");
 
-        txtBarrel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBarrelBetween.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtLockTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtStockTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtBarrelTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("To");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel12.setText("Between");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Between");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("Between");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("To");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("To");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -352,38 +428,91 @@ public class CommissionService extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addContainerGap()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtStockBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBarrelBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLock, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLockBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBarrel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(txtBarrelTo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLockTo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStockTo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLock, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBarrel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtLockTo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtStockTo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtLockBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtStockBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBarrelBetween, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBarrelTo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,13 +529,15 @@ public class CommissionService extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -426,28 +557,21 @@ public class CommissionService extends javax.swing.JFrame {
 
     private void btnBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBVAActionPerformed
 
-        if (txtLock.getText().isEmpty() || txtStock.getText().isEmpty() || txtBarrel.getText().isEmpty()) {
+        if (txtLockBetween.getText().isEmpty() || txtStockBetween.getText().isEmpty() || txtBarrelBetween.getText().isEmpty() || txtLockTo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Lock, Stock and Barrel Value Can Not Be Empty!");
         } else {
-            commissions = new ArrayList<>();
-            lock = Integer.parseInt(txtLock.getText());
-            stock = Integer.parseInt(txtStock.getText());
-            barrel = (stock + lock) / 2;
+            getInformation();
 
             bvaGeneratingTestcases();
         }
-
     }//GEN-LAST:event_btnBVAActionPerformed
 
     private void btnRBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBVAActionPerformed
 
-        if (txtLock.getText().isEmpty() || txtStock.getText().isEmpty() || txtBarrel.getText().isEmpty()) {
+        if (txtLockBetween.getText().isEmpty() || txtStockBetween.getText().isEmpty() || txtBarrelBetween.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Lock, Stock and Barrel Value Can Not Be Empty!");
         } else {
-            commissions = new ArrayList<>();
-            lock = Integer.parseInt(txtLock.getText());
-            stock = Integer.parseInt(txtStock.getText());
-            barrel = Integer.parseInt(txtBarrel.getText());
+            getInformation();
 
             rBVAGeneratingTestcases();
         }
@@ -464,6 +588,12 @@ public class CommissionService extends javax.swing.JFrame {
     private javax.swing.JButton btnRBVA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -478,8 +608,11 @@ public class CommissionService extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable tblInformation;
-    private java.awt.TextField txtBarrel;
-    private java.awt.TextField txtLock;
-    private java.awt.TextField txtStock;
+    private java.awt.TextField txtBarrelBetween;
+    private java.awt.TextField txtBarrelTo;
+    private java.awt.TextField txtLockBetween;
+    private java.awt.TextField txtLockTo;
+    private java.awt.TextField txtStockBetween;
+    private java.awt.TextField txtStockTo;
     // End of variables declaration//GEN-END:variables
 }
