@@ -22,6 +22,7 @@ public class CommissionService extends javax.swing.JFrame {
     private int lockNom, lockBetween, lockBetweenMinus, lockBetweenPlus, lockTo, lockToMinus, lockToPlus;
     private int stockNom, stockBetween, stockBetweenMinus, stockBetweenPlus, stockTo, stockToMinus, stockToPlus;
     private int barrelNom, barrelBetween, barrelBetweenMinus, barrelBetweenPlus, barrelTo, barrelToMinus, barrelToPlus;
+    private int count;
     private List<Commission> commissions;
 
     public CommissionService() {
@@ -31,19 +32,21 @@ public class CommissionService extends javax.swing.JFrame {
     public void bvaShowingTestcases() {
         bvaGeneratingTestcases();
         getTestcases();
-        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 5  |  Total Elements: 15  |  Total Unique Elements: 13");
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: " + (count / 3) + "  |  Total Elements: " + count + "  |  Total Unique Elements: " + commissions.size());
     }
 
     public void bvaGeneratingTestcases() {
         Commission commission = new Commission();
         commission.setInput(lockNom, stockNom, barrelNom);
         commissions.add(commission);
+        count += 3;
 
         int[] lockArr = {lockBetween, lockBetweenPlus, lockToMinus, lockTo};
         for (int i = 0; i < lockArr.length; i++) {
             Commission commission1 = new Commission();
             commission1.setInput(lockArr[i], stockNom, barrelNom);
             commissions.add(commission1);
+            count++;
         }
 
         int[] stockArr = {stockBetween, stockBetweenPlus, stockToMinus, stockTo};
@@ -51,6 +54,7 @@ public class CommissionService extends javax.swing.JFrame {
             Commission commission2 = new Commission();
             commission2.setInput(lockNom, stockArr[i], barrelNom);
             commissions.add(commission2);
+            count++;
         }
 
         int[] barrelArr = {barrelBetween, barrelBetweenPlus, barrelToMinus, barrelTo};
@@ -58,25 +62,28 @@ public class CommissionService extends javax.swing.JFrame {
             Commission commission3 = new Commission();
             commission3.setInput(lockNom, stockNom, barrelArr[i]);
             commissions.add(commission3);
+            count++;
         }
     }
 
     public void rBVAShowingTestcases() {
         rBVAGeneratingTestcases();
         getTestcases();
-        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 7  |  Total Elements: 21  |  Total Unique Elements: 19");
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: " + (count / 3) + "  |  Total Elements: " + count + "  |  Total Unique Elements: " + commissions.size());
     }
 
     public void rBVAGeneratingTestcases() {
         Commission commission = new Commission();
         commission.setInput(lockNom, stockNom, barrelNom);
         commissions.add(commission);
+        count += 3;
 
         int[] lockArr = {lockBetweenMinus, lockBetween, lockBetweenPlus, lockToMinus, lockTo, lockToPlus};
         for (int i = 0; i < lockArr.length; i++) {
             Commission commission1 = new Commission();
             commission1.setInput(lockArr[i], stockNom, barrelNom);
             commissions.add(commission1);
+            count++;
         }
 
         int[] stockArr = {stockBetweenMinus, stockBetween, stockBetweenPlus, stockToMinus, stockTo, stockToPlus};
@@ -84,6 +91,7 @@ public class CommissionService extends javax.swing.JFrame {
             Commission commission2 = new Commission();
             commission2.setInput(lockNom, stockArr[i], barrelNom);
             commissions.add(commission2);
+            count++;
         }
 
         int[] barrelArr = {barrelBetweenMinus, barrelBetween, barrelBetweenPlus, barrelToMinus, barrelTo, barrelToPlus};
@@ -91,6 +99,7 @@ public class CommissionService extends javax.swing.JFrame {
             Commission commission3 = new Commission();
             commission3.setInput(lockNom, stockNom, barrelArr[i]);
             commissions.add(commission3);
+            count++;
         }
     }
 
@@ -306,26 +315,23 @@ public class CommissionService extends javax.swing.JFrame {
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCommission, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCommission, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -345,15 +351,15 @@ public class CommissionService extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(btnCommission, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -519,16 +525,13 @@ public class CommissionService extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -546,22 +549,20 @@ public class CommissionService extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBVAActionPerformed
-
         if (checkValidate()) {
+            count = 0;
             getInformation();
             bvaShowingTestcases();
-
         } else {
             JOptionPane.showMessageDialog(this, "Input Range Can Not Be Empty!");
         }
     }//GEN-LAST:event_btnBVAActionPerformed
 
     private void btnRBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBVAActionPerformed
-
         if (checkValidate()) {
+            count = 0;
             getInformation();
             rBVAShowingTestcases();
-
         } else {
             JOptionPane.showMessageDialog(this, "Input Range Can Not Be Empty!");
         }

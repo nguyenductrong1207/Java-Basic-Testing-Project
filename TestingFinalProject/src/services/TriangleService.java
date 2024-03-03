@@ -26,6 +26,7 @@ public class TriangleService extends javax.swing.JFrame {
     private int minusMax;
     private int max;
     private int maxPlus;
+    private int count;
     private List<Triangle> triangles;
 
     public TriangleService() {
@@ -35,13 +36,14 @@ public class TriangleService extends javax.swing.JFrame {
     public void bvaShowingTestcases() {
         bvaGeneratingTestcases();
         getTestcases();
-        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 5  |  Total Elements: 15  |  Total Unique Elements: 13");
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: " + (count / 3) + "  |  Total Elements: " + count + "  |  Total Unique Elements: " + triangles.size());
     }
 
     public void bvaGeneratingTestcases() {
         Triangle triangle = new Triangle();
         triangle.setSide(nom, nom, nom);
         triangles.add(triangle);
+        count += 3;
 
         int[] arr = {min, minPlus, minusMax, max};
 
@@ -49,31 +51,35 @@ public class TriangleService extends javax.swing.JFrame {
             Triangle triangle1 = new Triangle();
             triangle1.setSide(arr[i], nom, nom);
             triangles.add(triangle1);
+            count++;
         }
 
         for (int i = 0; i < arr.length; i++) {
             Triangle triangle2 = new Triangle();
             triangle2.setSide(nom, arr[i], nom);
             triangles.add(triangle2);
+            count++;
         }
 
         for (int i = 0; i < arr.length; i++) {
             Triangle triangle3 = new Triangle();
             triangle3.setSide(nom, nom, arr[i]);
             triangles.add(triangle3);
+            count++;
         }
     }
 
     public void rBVAShowingTestcases() {
         rBVAGeneratingTestcases();
         getTestcases();
-        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: 7  |  Total Elements: 21  |  Total Unique Elements: 19");
+        JOptionPane.showMessageDialog(this, "Total Elements In Each Set: " + (count / 3) + "  |  Total Elements: " + count + "  |  Total Unique Elements: " + triangles.size());
     }
 
     public void rBVAGeneratingTestcases() {
         Triangle triangle = new Triangle();
         triangle.setSide(nom, nom, nom);
         triangles.add(triangle);
+        count += 3;
 
         int[] arr = {minusMin, min, minPlus, minusMax, max, maxPlus};
 
@@ -81,18 +87,21 @@ public class TriangleService extends javax.swing.JFrame {
             Triangle triangle1 = new Triangle();
             triangle1.setSide(arr[i], nom, nom);
             triangles.add(triangle1);
+            count++;
         }
 
         for (int i = 0; i < arr.length; i++) {
             Triangle triangle2 = new Triangle();
             triangle2.setSide(nom, arr[i], nom);
             triangles.add(triangle2);
+            count++;
         }
 
         for (int i = 0; i < arr.length; i++) {
             Triangle triangle3 = new Triangle();
             triangle3.setSide(nom, nom, arr[i]);
             triangles.add(triangle3);
+            count++;
         }
     }
 
@@ -280,12 +289,6 @@ public class TriangleService extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCommission, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
@@ -293,8 +296,10 @@ public class TriangleService extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCommission, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -316,13 +321,13 @@ public class TriangleService extends javax.swing.JFrame {
                 .addComponent(btnBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRBVA, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCommission, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -393,7 +398,7 @@ public class TriangleService extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 606, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,19 +428,18 @@ public class TriangleService extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBVAActionPerformed
-
         if (checkValidate()) {
+            count = 0;
             getInformation();
             bvaShowingTestcases();
         } else {
             JOptionPane.showMessageDialog(this, "Input Range Can Not Be Empty!");
         }
-
     }//GEN-LAST:event_btnBVAActionPerformed
 
     private void btnRBVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRBVAActionPerformed
-
         if (checkValidate()) {
+            count = 0;
             getInformation();
             rBVAShowingTestcases();
         } else {

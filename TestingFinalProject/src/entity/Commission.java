@@ -52,11 +52,11 @@ public class Commission {
                 commission = 0.10 * 1000.0;
                 commission = commission + 0.15 * 800;
                 commission = commission + 0.20 * (sales - 1800.0);
-                
+
             } else if (sales > 1000) {
                 commission = 0.10 * 1000;
                 commission = commission + 0.15 * (sales - 1000);
-                
+
             } else {
                 commission = 0.10 * sales;
             }
